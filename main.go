@@ -26,7 +26,7 @@ func (g *Graph) AddVertex(k int) {
 
 // AddEdge adds an edge to the graph
 // agrega una linea que va desde un nodo a otro, entonces le indicamos de donde hasta donde, pero para eso
-// primero nos traemos el nodo desde donde sale y el nodo hasta donde llega
+// primero nos traemos la direccion en mem del nodo desde donde sale y el nodo hasta donde llega
 func (g *Graph) AddEdge(from, to int) {
 	//get vertex (obtenemos la direccion del nodo de donde sale o a donde llega)
 	fromVertex := g.getVertex(from)
@@ -66,12 +66,13 @@ func contains(s []*Vertex, k int) bool {
 
 // HasEulerianPath verify if the graph has an eulerian path
 func (g *Graph) HasEulerianPath() bool {
+	//para saber si tiene un camino euleriano debe tener o dos o ningun vertice de grado impar, por lo que creo un contador
 	oddDegreeCount := 0
 
 	// Contar el número de vértices con grado impar
 	for _, v := range g.vertices {
-		degree := len(v.adjacent)
-		if degree%2 != 0 {
+		vertexCounter := len(v.adjacent)
+		if vertexCounter%2 != 0 {
 			oddDegreeCount++
 		}
 	}
